@@ -1,0 +1,13 @@
+name: SitOn
+version: ${project.version}
+main: net.serveron.hane.siton.SitOn
+api-version: 1.16
+commands:
+  sit:
+    usage: /cg
+    description: Custom Game
+
+permissions:
+  sit.*:
+    description: Gives access to all commands
+    default: op
