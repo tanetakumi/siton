@@ -1,29 +1,35 @@
 package net.serveron.hane.siton;
 
 
+import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import org.bukkit.Bukkit;
 
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
 import org.bukkit.event.player.PlayerToggleSneakEvent;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.spigotmc.event.entity.EntityDismountEvent;
 
 import java.util.Objects;
 
 
-public class SelectListener implements Listener {
+public class SitListener implements Listener {
 
     private final SitOn plugin;
-    private final String player_name;
 
-    public SelectListener(SitOn plugin, String player_name){
+    public SitListener(SitOn plugin){
         this.plugin = plugin;
-        this.player_name = player_name;
     }
+/*
+    @EventHandler
+    public void onPlayer(PlayerJumpEvent e){
+        if(e.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN))
+    }
+
+ */
 
     @EventHandler
     public void onSneak(PlayerToggleSneakEvent e){
@@ -32,6 +38,13 @@ public class SelectListener implements Listener {
             if(Objects.requireNonNull(e.getPlayer().getTargetBlock(2)).equals(block)){
                 new TimerTask(e.getPlayer(),block).runTaskLater(plugin, 20);
             }
+        }
+    }
+
+    @EventHandler
+    public void onLeaveChair(EntityDismountEvent e){
+        if(e.getDismounted().getType().equals(EntityType.ARMOR_STAND)){
+            e.getDismounted().remove();
         }
     }
 }
