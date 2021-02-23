@@ -25,8 +25,8 @@ public final class SitOn extends JavaPlugin {
         getLogger().info("Deinit");
         for (World world : Bukkit.getWorlds()) {
             for (Entity entity : world.getEntities()) {
-                if ((entity instanceof ArmorStand)) {
-                    if (Objects.requireNonNull(entity.getCustomName()).equals("sitarmor")) {
+                if ((entity instanceof ArmorStand) && entity.getCustomName()!=null) {
+                    if (entity.getCustomName().equals("sitarmor")) {
                         entity.remove();
                     }
                 }
