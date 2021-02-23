@@ -1,5 +1,9 @@
 package net.serveron.hane.siton;
 
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,6 +21,15 @@ public final class SitOn extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         getLogger().info("Deinit");
+        for (World world : Bukkit.getWorlds()) {
+            for (Entity entity : world.getEntities()) {
+                if ((entity instanceof ArmorStand)) {
+                    if (entity.getCustomName().equals("sitarmor")) {
+                        entity.remove();
+                    }
+                }
+            }
+        }
         HandlerList.unregisterAll();
     }
 }
