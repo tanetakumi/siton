@@ -7,6 +7,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
+
 public final class SitOn extends JavaPlugin {
 
     SitListener selectListener;
@@ -24,7 +26,7 @@ public final class SitOn extends JavaPlugin {
         for (World world : Bukkit.getWorlds()) {
             for (Entity entity : world.getEntities()) {
                 if ((entity instanceof ArmorStand)) {
-                    if (entity.getCustomName().equals("sitarmor")) {
+                    if (Objects.requireNonNull(entity.getCustomName()).equals("sitarmor")) {
                         entity.remove();
                     }
                 }

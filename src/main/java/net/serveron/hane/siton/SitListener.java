@@ -71,25 +71,11 @@ public class SitListener implements Listener {
                     //Collection<Entity> entities = e.getPlayer().getLocation().getNearbyEntities(2,2,2).;
                     Optional<Entity> ent = e.getPlayer().getLocation().getNearbyEntities(2,2,2).stream()
                             .filter(entity -> entity instanceof Player)
-                            .filter(entity -> entity != e.getPlayer())
+                            .filter(entity -> !entity.getName().equals(e.getPlayer().getName()))
                             .filter(entity -> entity.getPassengers().size()==0)
                             .filter(entity -> ((Player) entity).isSneaking())
                             .findFirst();
                     ent.ifPresent(entity -> entity.addPassenger(e.getPlayer()));
-/*
-                    Collection<Entity> entities = e.getPlayer().getLocation().getNearbyEntities(2,2,2);
-                    for(Entity entity:entities){
-                        if(entity instanceof Player){
-                            if(((Player) entity) != e.getPlayer()){
-                                if(((Player) entity).isSneaking()){
-                                    entity.addPassenger(e.getPlayer());
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
- */
                 }
             }
         }
